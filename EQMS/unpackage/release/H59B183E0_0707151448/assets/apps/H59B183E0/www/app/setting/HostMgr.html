@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../../css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="../../css/style.css"/>
+		<script src="../../js/mui.min.js"></script>
+		<script src="../../js/vue.min.js"></script>
+		<script src="../../config.js"></script>
+		<script src="../../js/function.js"></script>
+		<style type="text/css">
+			.container{
+				width: 100%;
+				height: 100%;
+			}
+			.mui-content{
+				height: 95%;
+			}
+			
+			.mui-radio.mui-left input[type=radio] {
+			    left: 0;
+			}
+			.mui-radio.mui-left label {
+			    padding-right: 15px;
+			    padding-left: 33px;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="container" id="app">
+			<header class="mui-bar mui-bar-nav">
+			    <a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			    <h1 class="mui-title">账套设置</h1>
+			    <a class="mui-icon icon-plus mui-icon-right-nav mui-pull-right" @tap="addHost"></a>
+			</header>
+			<div class="mui-content">
+				<div class="mui-content-padded">
+					<ul class="mui-table-view">
+			            <li class="mui-table-view-cell">
+			            	启用演示账套
+							<div id="demo" class="mui-switch mui-switch-blue mui-switch-mini mui-active" @tap="openSwitch">
+								<div class="mui-switch-handle"></div>
+							</div>
+			            </li>
+			        </ul>
+			        <ul class="mui-table-view" id="hostList">
+				        <li class="mui-table-view-cell" v-for="host in hosts" v-show="!host.isdemo"  @tap="changeHost(host.host)" >
+			            	<div class="mui-slider-right mui-disabled">
+								<a class="mui-btn mui-btn-blue" @tap="updateHost(host)">编辑</a>
+								<a class="mui-btn mui-btn-red" @tap="deleteHost(host)">删除</a>
+							</div>
+							<div class="mui-slider-handle mui-table">
+								<div class="mui-table-cell">
+									<div class="mui-input-row mui-radio mui-left">
+					            	    <label>{{ host.host }}</label>
+					            	    <input name="host" class="host" type="radio" :value="host.host" :checked="host.isdemo"/>
+					            	</div>
+								</div>
+							</div>
+			            </li>
+				    </ul>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+			// 代码保证 this.$el 在 document 中
+	    	mui.init({
+				swipeBack: true
+			});
+			
+			//vue
+			var app = new Vue({
+				el: "#app",
+				mounted: function () {
+					var _this = this;
+				  	this.$nextTick(function () {
+						_this.openSwitch();
+						_this.initData();
+			//			mui.plusReady(function(){
+			//			});
+				  	});
+				},
+				data: {
+					hosts: []
+				},
+				watch: {
+					hosts:function(val, oldVal){
+						setLsItem("hosts", JSON.stringify(val));
+					}
+				},
+				methods:{
+					initData: function(){
+						var _hosts = JSON.parse(getLsItem("hosts"));
+						if(_hosts){
+							this.$data.hosts = _hosts;
+						}else{
+							this.$data.hosts = getConfig().initialServers
+						}
+					},
+					//是否启用演示账套
+					openSwitch: function(){
+						var isActive = document.getElementById("demo").classList.contains("mui-active");
+						
+						if(isActive){
+						  	document.getElementById("hostList").classList.add("mui-hidden");
+						}else{
+						  	document.getElementById("hostList").classList.remove("mui-hidden");
+						}
+					},
+					//添加host地址
+					addHost: function(){
+						var btnArray = ['取消', '确定'];
+						mui.prompt('','http://101.227.66.87:8080/EQMS','访问地址',btnArray,function(e){
+							if(e.index == 1){
+						        if(e.value == '' || e.value == null){
+						        	mui.toast("请输入有效访问地址");
+						        }else{
+						        	app.$data.hosts.push({host: e.value})
+						        }
+						    }else{
+						        mui.toast('您取消了输入');
+						    }
+						},'div');
+					},
+					//更新host
+					updateHost: function(host){
+						var btnArray = ['取消', '确定'];
+						mui.prompt('','http://101.227.66.87:8080/EQMS','访问地址',btnArray,function(e){
+							if(e.index == 1){
+						        if(e.value == '' || e.value == null){
+						        	mui.toast("请输入有效访问地址");
+						        }else{
+						        	app.$data.hosts.push({host: e.value})
+						        }
+						    }else{
+						        mui.toast('您取消了输入');
+						    }
+						},'div');
+						document.querySelector('.mui-popup-input input').value = host.host;
+					},
+					//删除host
+					deleteHost: function(host){
+						
+					},
+					//切换radio
+					changeHost: function(host){
+						setLsItem("host", host);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

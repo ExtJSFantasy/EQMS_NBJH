@@ -1,0 +1,49 @@
+{
+  "app/msgInfo.html": {
+    "href": "app/msgInfo.html",
+    "resources": [],
+    "priority": 0
+  },
+  "app/taskInfo.html": {
+    "href": "app/taskInfo.html",
+    "resources": [],
+    "priority": 1
+  },
+  "app/appInfo.html": {
+    "href": "app/appInfo.html",
+    "resources": [],
+    "priority": 2
+  },
+  "app/setting.html": {
+    "href": "app/setting.html",
+    "resources": [],
+    "priority": 3
+  },
+  "app/main.html": {
+    "href": "app/main.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  },
+  "app/setting/HostMgr.html": {
+    "href": "app/setting/HostMgr.html",
+    "resources": [],
+    "priority": 2
+  },
+  "app/setting/guide.html": {
+    "href": "app/setting/guide.html",
+    "resources": [],
+    "priority": 3
+  },
+  "app/util/barcode_scan.html": {
+    "href": "app/util/barcode_scan.html",
+    "resources": [],
+    "priority": 4
+  },
+  "index.html": {
+    "href": "index.html",
+    "resources": [],
+    "refer": [],
+    "priority": 0
+  }
+}

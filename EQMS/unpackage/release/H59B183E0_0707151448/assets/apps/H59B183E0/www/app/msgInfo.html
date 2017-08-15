@@ -1,0 +1,98 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/vue.min.js" ></script>
+	</head>
+
+	<body>
+		<ul class="mui-table-view mui-table-view-chevron" id="app">
+		    <li class="mui-table-view-cell mui-media" v-for="msg in msgInfo">
+		        <a href="javascript:;" class="mui-navigate-right">
+		            <img class="mui-media-object mui-pull-left" src="http://placehold.it/40x30">
+		            <div class="mui-media-body">
+		              	 {{msg.title}}
+		                <p class="mui-ellipsis">{{msg.content}}</p>
+		            </div>
+		        </a>
+		    </li>
+		</ul>
+		
+		<script type="text/javascript">
+			mui.init()
+			
+			var app = new Vue({
+				el: "#app",
+				mounted: function () {
+					var _this = this;
+				  	this.$nextTick(function () {
+				  		//初始化
+				  		if(window.plus){
+				  			_this.initData();
+				  		}else{
+				  			document.addEventListener('plusready',function(){
+				  				_this.initData();
+				  			},false);
+				  		}
+				  	});
+				},
+				data: {
+					msgInfo: []
+				},
+				watch:{
+					msgInfo: function(val, oldVal){
+						
+					}
+				},
+				filters:{
+					dataFormat: function(value){
+  						return value.substr(0, 10)
+					}
+				},
+				methods:{
+					initData: function(){
+						// 监听点击消息事件
+					    plus.push.addEventListener( "click", function( msg ) {
+					        // 判断是从本地创建还是离线推送的消息
+					        switch( msg.payload ) {
+					            case "LocalMSG":
+					                mui.toast( "点击本地创建消息启动：" );
+					            break;
+					            default:
+					                mui.toast( "点击离线推送消息启动：");
+					            break;
+					        }
+					        // 提示点击的内容
+					        mui.toast( msg.content );
+					        // 处理其它数据
+//					        logoutPushMsg( msg );
+					    }, false );
+					    // 监听在线消息事件
+					    plus.push.addEventListener( "receive", function( msg ) {
+					        if ( msg.aps ) {  // Apple APNS message
+					            mui.toast( "接收到在线APNS消息：" );
+					        } else {
+					            mui.toast( "接收到在线透传消息：" );
+					        }
+					        mui.toast( msg );
+//					        logoutPushMsg( msg );
+					    }, false );
+//					    mui.alert(JSON.stringify(plus.push.getAllMessage()))
+						this.msgInfo = plus.push.getAllMessage();
+					},
+					itemClick: function(item){
+						
+					}
+				}
+			});
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,50 @@
+.mui-input-group:first-child {
+	margin-top: 20px;
+}
+
+.mui-input-group:last-child{
+	margin-top: 20px;
+}
+
+.mui-input-row label {
+    font-family: Muiicons; 
+    line-height: 1.1;
+    float: left;
+    width: 20%;
+    padding: 11px 15px;
+}
+
+.mui-input-row label~input{
+	width: 80%;
+}
+
+.mui-btn {
+    padding: 10px;
+}
+
+.mui-btn-block{
+	margin: 20px 0 20px 0;
+}
+
+.mui-content-padded {
+    margin: 0 30px 0 30px;
+    padding-top: 20%;
+}
+    
+.mui-btn-link{
+	font-size: 16px;
+}
+
+.logo{
+	width: 100%;
+	height: 25%;
+}
+
+.icon-EQMS{
+	font-size: 130px;
+	color: #007aff;
+}
+
+.mui-input-row label{
+	padding: 6px 15px;
+}

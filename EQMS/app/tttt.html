@@ -1,0 +1,61 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<script src="../js/mui.min.js"></script>
+		<script src="../js/vue.min.js"></script>
+	</head>
+
+	<body>
+		<div id="app">
+			<ul class="mui-table-view">
+		        <li class="mui-table-view-cell" v-for="item in items">
+		            <a class="mui-navigate-right">
+		               	{{item.title}}
+		            </a>
+		        </li>
+		    </ul>
+		</div>
+		
+		<script type="text/javascript">
+			
+			var app = new Vue({
+				el: "#app",
+				data: {
+	      			items: [
+	      				{title: 'flsdkjflksdjf'},
+	      				{title: 'flsdkjflksdjf'},
+	      				{title: 'flsdkjflksdjf'},
+	      				{title: 'flsdkjflksdjf'},
+	      				{title: 'flsdkjflksdjf'}
+	      			]
+				},
+				mounted: function () {
+					// Vue实例化对象
+					var self = this;
+				  	this.$nextTick(function () {
+				  		mui.init();
+		      			
+		      			
+				  	});
+				},
+				watch:{
+					initIndex: {
+						handle:function(val, oldVal){
+						},
+						deep: true
+					}
+				},
+				methods:{
+					
+				}
+			});
+		
+		</script>
+	</body>
+
+</html>

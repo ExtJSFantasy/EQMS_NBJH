@@ -1,0 +1,128 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/global.css"/>
+		<style type="text/css">
+			.mui-content{
+				width: 100%;
+				height: 100%;
+			}
+			.container{
+				width: 100%;
+				height: 100%;
+				display: flex;
+			}
+			.top{
+				width: 100%;
+				height: 20%;
+				text-align: center;
+				display: flex;
+			}
+			.container1{
+				width: 100%;
+				height: 60%;
+				display: flex;
+			}
+			
+			.footer{
+				width: 100%;
+				height: 20%;
+			}
+			
+			p{
+				font-size: 14px;
+				color: #2d2d2d;
+				margin: 4%;
+			}
+			
+			.box{
+				width: 100%;
+				height: 70%;
+			}
+			
+			.card{
+				width: 110px;
+				height: 135px;
+				text-align: center;
+				color: white;
+				margin: auto;
+				display: flex;
+				border-radius: 5px;
+				cursor: pointer;
+			}
+			
+			.card:hover{
+				opacity: 0.6;
+			}
+			
+			.tasks{
+				background: #0a926c;
+				transform: rotate(-17deg) translate(20px, 0);
+				z-index: 0;
+			}
+			
+			.mytasks{
+				background: #ab3f3f;
+				transform: translate(0, -30px);
+				z-index: 2;
+			}
+			
+			.mytasked{
+				background: #0e6aa0;
+				transform: rotate(17deg) translate(-20px, 0);
+				z-index: 3;
+			}
+			
+			.textCenter{
+				margin: auto;
+			}
+			
+			.mdtitle{
+				font-size: x-large;
+			}
+			
+			.textCenter1{
+				margin: 0 auto;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content container">
+			<div class="box textCenter">
+				<div class="top">
+					<span class="mdtitle textCenter1">清晰管控公私任务</span>
+				</div>
+			    <div class="container1">
+			    	<div class="card tasks">
+			    		<div class="textCenter">
+			    			任务板
+			    		</div>
+			    	</div>
+				    <div class="card mytasks">
+				    	<div class="textCenter">
+				    		我的任务
+				    	</div>
+				    </div>
+				    <div class="card mytasked">
+				    	<div class="textCenter">
+				    		我的交办
+				    	</div>
+				    </div>
+			    </div>
+			    <div class="footer">
+			    	<p>不仅能够对组织层级中的成员实现快速任务下达，还能直接给组织结构中的联系人安排协作任务。</p>
+			    </div>
+			</div>
+		</div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init()
+		</script>
+	</body>
+</html>

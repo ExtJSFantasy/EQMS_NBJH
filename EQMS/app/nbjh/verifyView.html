@@ -1,0 +1,786 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" href="../../css/mui.picker.css" />
+		<link rel="stylesheet" href="../../css/mui.poppicker.css" />
+		<link rel="stylesheet" href="../../css/style.css" />
+		<link rel="stylesheet" href="../../css/global.css" />
+		<script type="text/javascript" src="../../js/vue.min.js" ></script>
+		<script type="text/javascript" src="../../js/mui.min.js" ></script>
+		<script type="text/javascript" src="../../js/common.js" ></script>
+		<script type="text/javascript" src="../../js/mui.picker.js" ></script>
+		<script type="text/javascript" src="../../js/mui.poppicker.js" ></script>
+		<script type="text/javascript" src="../../js/function.js" ></script>
+		<script type="text/javascript" src="../../config.js" ></script>
+		<style>
+			html, body {
+			  width: 100%;
+			  height: 80%;
+			  margin: 0;
+			  padding: 0;
+			}
+			li{
+				display: block;
+			}
+			#topPopover {
+				position: absolute;
+			    left: 10%;
+			    top: 10%;
+			    width: 80%;
+			    height: 80%;
+			}
+			.ul-top{
+				margin-top: 3rem;
+				width: 100%;
+			}
+			.mui-row.mui-fullscreen>[class*="mui-col-"] {
+				height: 100%;
+			}
+			.mui-col-xs-3,
+			.mui-control-content {
+				overflow-y: auto;
+				height: 100%;
+			}
+			.mui-segmented-control .mui-control-item {
+				line-height: 50px;
+				width: 100%;
+			}
+			.mui-segmented-control.mui-segmented-control-inverted .mui-control-item.mui-active {
+				background-color: #fff;
+			}
+			.item-flex{
+				display: flex;
+			}
+			.items-flex{
+				flex: 1;
+			}
+			.items-flex2{
+				flex: 2;
+			}
+			.items-center{
+				text-align: center;
+			}
+			.commont{
+				
+			}
+			.mui-input-group input, .mui-input-group textarea {
+			    margin-bottom: 0;
+			    border: 1px solid #c8c7cc;
+			    border-radius: 0;
+			    background-color: transparent;
+			    -webkit-box-shadow: none;
+			    box-shadow: none;
+			}
+			.mui-table-view-cell.mui-active{
+				background-color: transparent;
+			}
+			/*.mui-scroll-wrapper {
+			    position: relative;
+			    z-index: 2;
+			    top: 0;
+			    bottom: 0;
+			    left: 0;
+			    overflow: hidden;
+			    width: 100%;
+			}*/
+			/*.mui-table-view-cell.mui-collapse .mui-table-view .mui-table-view-cell {
+			    padding-left: 1rem;
+			    background-position: 31px 100%;
+			}*/
+		</style>
+	</head>
+
+	<body>
+		<div class="mui-content" id="gp12">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title" v-text="title"></h1>
+				<button @tap="onTapSave" class="mui-pull-right" style="margin-top: 1.5rem;">提交</button>
+			</header>
+			<form class="mui-input-group" style="margin-top: 4.5rem; position: relative;">
+				<div style="padding-top: .5rem;">基础信息</div>
+			    <div class="" style="display: flex;padding-top: 1rem;padding-bottom: 1rem;">
+			    	<div class="mui-hidden">
+				        <input type="text" v-model="subId" readonly="">
+				    </div>
+				    <div class="mui-hidden">
+				        <input type="text" v-model="active" readonly="">
+				    </div>
+				    <div class="mui-hidden">
+				        <input type="text" v-model="createUser" readonly="">
+				    </div>
+				    <div class="mui-hidden">
+				        <input type="text" v-model="createDate" readonly="">
+				    </div>
+				    <div class="mui-hidden">
+				        <input type="text" v-model="updateDate" readonly="">
+				    </div>
+				    <div class="mui-hidden">
+				        <input type="text" v-model="checkUserName" readonly="">
+				    </div>
+				    <div class="mui-hidden">
+				        <input type="text" v-model="productName" readonly="">
+				    </div>
+				    <div class="mui-input-row">
+				        <label style="font-size: .8rem;">班组</label>
+				    	<input @tap='showUserPicker' type="text" v-model="classes" readonly="" placeholder="请选择">
+				    </div>
+				    <div class="mui-input-row">
+				        <label style="font-size: .8rem;">检测员</label>
+				        <input type="text" style="font-size: 0.8rem;" v-model="userName" readonly="">
+				    </div>
+				    <div class="mui-input-row">
+				        <label style="font-size: .8rem;">产品型号</label>
+				        <input v-model="productNo" @tap="selectPNum" type="text" readonly="">
+				    </div>
+			    </div>
+			    <div class="" style="display: flex;padding-top: 1rem;padding-bottom: 1rem;">
+			    	<div class="mui-input-row">
+				        <label style="font-size: .8rem;">批次号</label>
+				    	<input type="text" v-model="batchNo" placeholder="请输入">
+				    </div>
+				    <div class="mui-input-row">
+				        <label style="font-size: .8rem;">生产数量</label>
+				        <input type="number" v-model="productNum" onkeyup="if(event.keyCode !=37 && event.keyCode != 39)value=value.replace(/\D/g,'')" placeholder="请输入">
+				    </div>
+				    <div class="mui-input-row">
+				        <label style="color: red;font-size: .8rem;">不合格数</label>
+				        <input type="text" v-model="sumNum" readonly="">
+				    </div>
+			    </div>
+			</form>
+			
+			<form class="mui-input-group" id="titleForm" style="margin-top: 1rem;">
+				<div style="padding-top: .5rem;">尺寸检测(实测)</div>
+			    <div id="" class="item-flex">
+			    	<div class="items-flex2 items-center"><p>内径</p></div><div class="items-flex2 items-center" style="border-bottom: transparent;
+    border-left: 1px;
+    border-right: 1px;
+    border-top: transparent;
+    border-style: solid;
+    margin-right: 2rem;
+    color: #c8c7cc;"><p>外径</p></div><div class="items-flex items-center"><p>长度</p></div>
+			    	
+			    </div>
+			    <div class="">
+			    		<div id="" class="item-flex"><div class="mui-hidden">
+					        <input type="text" v-model="subId1" readonly="">
+					    </div>
+					    <div class="mui-hidden">
+					        <input type="text" v-model="active1" readonly="">
+					    </div>
+					    <div class="mui-hidden">
+					        <input type="text" v-model="createUser1" readonly="">
+					    </div>
+					    <div class="mui-hidden">
+					        <input type="text" v-model="createDate1" readonly="">
+					    </div>
+					    <div class="mui-hidden">
+					        <input type="text" v-model="updateDate1" readonly="">
+					    </div>
+		    			
+		    			<div class="mui-hidden">
+					        <input type="text" v-model="checkInfoId" readonly="">
+					    </div>
+		    			 <div class="item-flex items-flex2">
+		    			 	<input class="items-flex" v-model="innerLen1" placeholder="内径"  type="number" placeholder="内径">
+		    			 	<input class="items-flex" v-model="innerLen11" placeholder="内径(大)" type="number" placeholder="内径(大)">
+		    			 </div>
+		    			 <div class="item-flex items-flex2">
+		    			 	<input class="items-flex" v-model="outerLen1" placeholder="外径" type="number" placeholder="外径">
+		    			 	<input class="items-flex" v-model="outerLen11" placeholder="外径(大)" type="number" placeholder="外径(大)">
+		    			 </div>
+		    			 <input class="items-flex" v-model="length1" placeholder="请输入测量长度" type="number" placeholder="请输入测量长度">
+		    		</div>
+		    		<div id="" class="item-flex">
+		    			 <div class="item-flex items-flex2">
+		    			 	<input class="items-flex" v-model="innerLen2" placeholder="内径" type="number" placeholder="内径">
+		    			 	<input class="items-flex" v-model="innerLen22" placeholder="内径(大)" type="number" placeholder="内径(大)">
+		    			 </div>
+		    			 <div class="item-flex items-flex2">
+		    			 	<input class="items-flex" v-model="outerLen2" placeholder="外径" type="number" placeholder="外径">
+		    			 	<input class="items-flex" v-model="outerLen22" placeholder="外径(大)" type="number" placeholder="外径(大)">
+		    			 </div>
+		    			 <input class="items-flex" v-model="length2" placeholder="请输入测量长度" type="number" placeholder="请输入测量长度">
+		    		</div>
+		    		<div id="" class="item-flex">
+		    			 <div class="item-flex items-flex2">
+		    			 	<input class="items-flex" v-model="innerLen3" placeholder="内径" type="number" placeholder="内径">
+		    			 	<input class="items-flex" v-model="innerLen33" placeholder="内径(大)" type="number" placeholder="内径(大)">
+		    			 </div>
+		    			 <div class="item-flex items-flex2">
+		    			 	<input class="items-flex" v-model="outerLen3" placeholder="外径" type="number" placeholder="外径">
+		    			 	<input class="items-flex" v-model="outerLen33" placeholder="外径(大)" type="number" placeholder="外径(大)">
+		    			 </div>
+		    			 <input class="items-flex" v-model="length3" placeholder="请输入测量长度" type="number" placeholder="请输入测量长度">
+		    		</div>
+			    </div>
+			</form>
+			<div class="mui-content mui-row" style="padding-top: 1rem;">
+				<div class="mui-col-xs-4" >
+					<ul id="middol1" class="mui-table-view mui-table-view-chevron"  >
+						<li class="mui-table-view-cell mui-collapse" v-for="(defectType,index) in defectTypes" ><a  @tap="childrenType(index,defectType)"  ref="defectTypesItems" class="mui-navigate-right" href="#">{{defectType.text}}</a>
+							<ul id="middol" class="mui-table-view mui-table-view-chevron">
+								<li  class="mui-table-view-cell commont mui-navigate" v-for="(defectTypeChildren,childrenIndex) in defectType.children">
+									<a @tap="childrenItem(childrenIndex,defectTypeChildren)" ref="childrenItems" id="childrenItem" class="mui-navigate" href="#content1">{{defectTypeChildren.text}}</a>
+								</li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<div id="segmentedControlContents" v-show="isShow" class="mui-col-xs-8" style="border-left: 1px solid #c8c7cc;height: 20rem;">
+					<div id="content1" style=""> <!--class="mui-control-content"style="position: relative;overflow-y: auto;height: 100%;"-->   
+						<div class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<div class="mui-input-row mui-search" style="width: 80%;margin: auto;margin-top: 1rem;">
+									<input type="search" class="" v-model='search' placeholder="">
+								</div>
+								 <ul class="mui-table-view">
+								  <li class="mui-table-view-cell" v-for="(item,index) in items">
+								    <div class="" style="width: 100%;display: flex;">
+								    	<span v-html="item.defectName" style="flex: 2;padding-top: .5rem;"></span>
+										<div class="" style="flex: 1;border-top: solid 0px #e5e5e5;display: flex;">
+											<div @tap="onTapMinus(item,index)" class="icon-minus2" style="flex: 1;color: red;padding-top: .5rem; padding-bottom: .5rem;text-align: -webkit-center;margin-right: .5rem;"></div>
+											<input @tap="onTapNum(item,index)" id="" style="flex: 2;width: 3rem;height: 1.5rem;padding-top: .5rem; padding-bottom: .5rem;margin-top: .3rem;" v-model="item.defectNum"></input>
+											<div @tap="onTapPlus(item,index)" class="icon-plus2" style="flex: 1;color: blue;padding-top: .5rem;
+    padding-bottom: .5rem;
+    text-align: -webkit-center;margin-right: .5rem;"></div>
+											<div @tap="onTapCamera(item,index)" class="mui-icon mui-icon-camera" style="flex: 1;padding-bottom: .5rem;text-align: -webkit-center;font-size: 2rem;"></div>
+										</div>
+									</div>
+								  </li>
+								 </ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div id="topPopover" class="mui-popover">
+				<div class="mui-input-row mui-search" style="width: 80%;margin: auto;margin-top: 1rem;">
+					<input type="search" class="" v-model="searchVal" v-on:input="searchProductNum" placeholder="">
+				</div>
+				<div class="mui-content" id="refreshData" style="height: 80%;">
+					<div  class=" mui-scroll-wrapper" style="height: 100%;position: relative;">
+						<div class="mui-scroll">
+							 <ul class="mui-table-view" >
+							  <li class="mui-table-view-cell" v-for="(searchValData,index) in searchValDatas" @tap="selectItem(searchValData,index)">
+							    <label >&nbsp;&nbsp;</label><span v-html="searchValData.productTNo"></span>
+							  </li>
+							 </ul>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+			var mask = mui.createMask();
+			var app = new Vue({  
+		        el:'#gp12',  
+		        data:{ 
+		        	title:'',
+		        	isShow:false,
+		        	classes:'',
+		        	search: '',
+		        	searchVal:'',
+		        	searchValDatas:[],
+		        	products: [],
+		        	products2:[],
+		        	productNo:'',
+		        	batchNo:'',
+		        	productNum:0,
+		        	defectTypes:[],
+		        	commentIndex:0,
+		        	userName:'',
+		        	sumNum:0,
+		        	subId:-1,
+		        	active:1,
+		        	createUser:'',
+		        	checkUserName:'',
+		        	productName:'',
+		        	subId1:-1,
+		        	active1:1,
+		        	createUser1:'',
+		        	createDate1:null,
+		        	updateDate1:null,
+		        	checkInfoId:'',
+		        	createDate:null,
+		        	updateDate:null,
+		        	innerLen1:'',
+		        	innerLen11:'',
+		        	innerLen2:'',
+		        	innerLen22:'',
+		        	innerLen3:'',
+		        	innerLen33:'',
+		        	length1:'',
+		        	length2:'',
+		        	length3:'',
+		        	outerLen1:'',
+		        	outerLen11:'',
+		        	outerLen2:'',
+		        	outerLen22:'',
+		        	outerLen3:'',
+		        	outerLen33:'',
+		            items2:[]
+		        },
+		        beforeCreate:function(){
+		        	
+		        },
+		        updated: function () {
+		        },
+		        computed: {
+				  items: function() {
+					   var _search = this.search;
+					   if (_search) {
+					    return this.products.filter(function(product) {
+						     return Object.keys(product).some(function(key) {
+						      return String(product[key]).toLowerCase().indexOf(_search) > -1
+						     })
+					    })
+					   }
+				   return this.products;
+				  }
+				 },
+				 watch: {
+					products2: {
+						deep: true,
+						handler: function(cval, oval){
+							var _this = this;
+							_this.sumNum = 0;
+							cval.forEach(function(item, index){
+								if(item.defectNum == '' || item.defectNum == null){
+									_this.sumNum += 0;
+								}else{
+									_this.sumNum += parseInt(item.defectNum);
+								}
+							})
+						}
+					},
+				 },
+		        mounted:function(){
+		        	mui('.mui-scroll-wrapper').scroll({
+						indicators: true //是否显示滚动条
+					});
+					var _this = this;
+					
+//				  	mui.init({
+//				  		pullRefresh : {
+//					    container:"#refreshData",//待刷新区域标识，querySelector能定位的css选择器均可，比如：id、.class等
+//					    down: {//下拉刷新
+//				            //auto:true,//可选,默认false.自动下拉刷新一次
+////				            contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+////				            contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+////				            contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+////				            callback: pulldownRefresh
+//							style:'circle',
+//							callback: pulldownRefresh
+//				        },
+//					    up : {
+//					    //  height:50,//可选.默认50.触发上拉加载拖动距离
+//					      //auto:true,//可选,默认false.自动上拉加载一次
+////					      contentdown : "上拉可以加载数据",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+////				          contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+////					      contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+////					      contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+////					      callback :onRefreshData //必选，刷新函数，根据具体业务来编写，比如通过ajax从服务器获取新数据；
+//					      contentrefresh: '正在加载...',
+//					      callback :onRefreshData
+//					    }
+//					  }
+//				  	});
+				  	mui.init({
+				  		swipeBack:false,
+						/*pullRefresh: {
+							container: '#refreshData',
+							down: {
+								style:'circle',
+								callback: pulldownRefresh
+							},
+							up: {
+								//auto:true,
+								contentrefresh: '正在加载...',
+								callback: onRefreshData
+							}
+						}*/
+					});
+					var _arr = [];
+					//类型用于判断是GP12还是半成录入
+					var _type = getLsItem("type");
+					mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"getClassesByType",{type:_type},function(data){
+		        			_this.items2 = JSON.stringify(data.data);
+		        			for(var i=0,length=data.data.length;i<length;i++){
+						        _arr.push({value:data.data[i].field03,text:data.data[i].field03});
+						    }
+		        			_this.items2 = _arr;
+		        		})
+					
+					mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"getProductModel",{page:0,limit:50,start:0,searchVal:_this.searchVal},function(data){
+						//console.log(data.data);
+		        			_this.searchValDatas = data.data;
+		        		})
+					
+					_this.title = _type == 2 ? "GP12" : "半成录入";
+					//console.log(_type);
+
+					//检测员
+					_this.userName = JSON.parse(getLsItem("logindata"))[0].userDescription;
+					if(_type == 2){
+						document.getElementById("titleForm").style.display = 'none';
+					}
+				  	if(window.plus){
+						_this.plusReady();
+					}else{
+						document.addEventListener("plusready",_this.plusReady,false);
+					}
+					//console.log(2345678);
+			 	//获取所有零件
+				 	
+		        },
+		        methods:{
+		        	plusReady:function(){
+		        		//console.log(11111);
+		        		var _this = this;
+		        		/*var old_back = mui.back;
+						mui.back = function(){
+							  var btn = ["确定","取消"];
+							  mui.confirm('程序正在审核，确定取消？','NBJH',btn,function(e){
+							    if(e.index==0){
+							    	//执行mui封装好的窗口关闭逻辑；
+							    	console.log(1234567);
+							    	old_back();
+							    }
+							});
+						}*/
+		        		//基础信息
+		        		var _commentData1 =  getLsItem("commentData");
+		        		//console.log(getLsItem("commentData") == "emp");
+		        		if(_commentData1 == null || _commentData1 == '' || _commentData1 == "emp"){
+		        			//
+		        		} else {
+		        			var _commentData = JSON.parse(getLsItem("commentData"));
+			        		//console.log(222222);
+			        		
+			        		//console.log(getLsItem("commentData"));
+		        			_this.classes = _commentData.classes;
+			        		_this.productNo = _commentData.productNo;
+			        		_this.batchNo = _commentData.batchNo;
+			        		_this.productNum = _commentData.productNum;
+			        		_this.sumNum = _commentData.unqualifiedNum;
+			        		_this.subId = _commentData.subId;
+			        		_this.subId1 = _commentData.subId;
+			        		//_this.checkInfoId = _commentData.subId;
+			        		_this.createDate1 = _commentData.createDate1;
+			        		_this.createDate = _commentData.createDate;
+			        		_this.updateDate = _commentData.updateDate;
+			        		_this.updateDate = _commentData.updateDate;
+		        		}
+		        		
+		        		var ws=plus.webview.currentWebview();
+		        		
+		        		console.log(JSON.stringify(ws.data[0]));
+		        		if(ws.data[0].data.length > 0){
+		        			var _titleDatas = ws.data[0].data[0];
+		        			_this.innerLen1 = _titleDatas.innerLen1;
+				        	_this.innerLen11 = _titleDatas.innerLen11;
+				        	_this.innerLen2 = _titleDatas.innerLen2;
+				        	_this.innerLen22 = _titleDatas.innerLen22;
+				        	_this.innerLen3 = _titleDatas.innerLen3;
+				        	_this.innerLen33 = _titleDatas.innerLen33;
+				        	_this.length1 = _titleDatas.length1;
+				        	_this.length2 = _titleDatas.length2;
+				        	_this.length3 = _titleDatas.length3;
+				        	_this.outerLen1 = _titleDatas.outerLen1;
+				        	_this.outerLen11 = _titleDatas.outerLen11;
+				        	_this.outerLen2 = _titleDatas.outerLen2;
+				        	_this.outerLen22 = _titleDatas.outerLen22;
+				        	_this.outerLen3 = _titleDatas.outerLen3;
+				        	_this.outerLen33 = _titleDatas.outerLen33;
+		        		}
+			        	
+			        	//
+			        	_this.defectTypes = ws.data[1].children;
+			        	_this.products2 = ws.data[2].data;
+		        	},
+		        	plusReady2:function(item){
+		        		var _this = this;
+		        		var ws=plus.webview.currentWebview();
+		        		var _titleDatas = ws.data[0];
+		        		var _defectType = ws.data[1].children;
+			        	var _defectDatas = ws.data[2].data;
+			        	var _data = [];
+			        	for(var n=0;n<_defectDatas.length;n++){
+			        		if(item.defectGroups == _defectDatas[n].defectGroups && item.text == _defectDatas[n].defectGroupsChild){
+			        			_data.push(_defectDatas[n]);
+			        		}
+			        	}
+			        	//console.log(JSON.stringify(_data));
+			        	_this.products = _data;
+		        	},
+		        	searchProductNum:function(){
+		        		var _this = this;
+		        		mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"getProductModel",{page:0,limit:20,start:0,searchVal:_this.searchVal},function(data){
+						//console.log(data.data);
+		        			_this.searchValDatas = data.data;
+		        		})
+		        	},
+		        	showUserPicker:function(){
+		        		
+		        		var _this = this;
+		        		var userPicker = new mui.PopPicker();
+			        	userPicker.setData(_this.items2);
+		        		userPicker.show(function(items) {
+		        			_this.classes = items[0].text;
+						});
+		        	},
+		        	selectPNum:function(){
+		        		var _this = this;
+		        		mui('#topPopover').popover('toggle');
+		        		
+		        	},
+		        	selectItem:function(item,index){
+		        		this.productNo = item.productTNo;
+		        		this.productName = item.productName
+				 		//_this.itemData = item;
+				 		mui('#topPopover').popover('toggle');
+				 		//console.log(item);
+				 	},
+				 	//获得缺陷类型
+				 	childrenType:function(index,item){
+				 		//this.initView();
+				 		var _this = this;
+				 		//console.log(this.$refs.defectTypesItems);
+				 		_this.$refs.defectTypesItems.forEach(function(data,indexs){
+				 			//console.log(data);
+				 			if(data.className == 'mui-navigate-right mui-active'){
+				 				_this.$refs.defectTypesItems[indexs].style.backgroundColor = '#7373f3'
+				 			}else{
+				 				_this.$refs.defectTypesItems[indexs].style.backgroundColor = '#f7f7f7'
+				 			}
+				 		})
+				 	},
+				 	//缺陷类型的具体缺陷
+				 	childrenItem:function(index,item){
+				 		var _this = this;
+				 		//console.log(this.$refs.childrenItems);
+				 		_this.$refs.childrenItems.forEach(function(data,indexs){
+				 			if(data.className == 'mui-navigate mui-active'){
+				 				_this.isShow = true;
+				 				_this.$refs.childrenItems[indexs].style.backgroundColor = '#8cce97'
+				 			}else{
+				 				_this.$refs.childrenItems[indexs].style.backgroundColor = '#f7f7f7'
+				 			}
+				 		});
+				 		_this.plusReady2(item);
+				 	},
+				 	//减号
+				 	onTapMinus:function(item,index){
+				 		//console.log("minus");
+				 		var _this = this;
+				 		if(item.defectNum > 0){
+				 			item.defectNum--;
+				 			_this.sumNum--
+				 		}
+				 	},
+				 	//数字
+				 	onTapNum:function(item,index){
+				 		//console.log("num");
+				 		
+				 	},
+				 	//加号
+				 	onTapPlus:function(item,index){
+				 		var _this = this;
+				 		//console.log(item);
+				 		item.defectNum++;
+				 		_this.sumNum ++;
+				 		//console.log("plus");
+				 	},
+				 	//拍照
+				 	onTapCamera:function(item,index){
+				 		//console.log("camera");
+				 		//console.log(JSON.stringify(item));
+				 		if(item.defectImgId == null){
+				 			item.defectImgId = new Date().getTime()+"";
+				 		}
+				 		clicked("cameraView.html", true, true,{},{itemData:item});
+				 	},
+				 	//保存
+				 	onTapSave:function(){
+				 		mask.show();//显示遮罩层
+				 		var _this = this;
+				 		//console.log(JSON.stringify(_this.subId));
+				 		//console.log(_this.active);
+				 		//return;
+				 		if(_this.classes == null || _this.classes == ''){
+				 			mui.toast("请选择班组!");
+				 			return;
+				 		}
+				 		if(_this.productNo == null || _this.productNo == ''){
+				 			mui.toast("请选择产品型号!");
+				 			return;
+				 		}
+				 		if(_this.batchNo == null || _this.batchNo == ''){
+				 			mui.toast("请输入批次号!");
+				 			return;
+				 		}
+				 		if(_this.productNum == null || _this.productNum == ''||_this.productNum == 0){
+				 			mui.toast("请输入生产数量!");
+				 			return;
+				 		}
+				 		var _loginData = JSON.parse(getLsItem("logindata"))[0];
+				 		var _type = getLsItem("type");
+				 		//console.log(_loginData);
+				 		//基础信息
+				 		var _baseObj = {};
+						    _baseObj.active = _this.active;
+						    _baseObj.batchNo = _this.batchNo;
+						    _baseObj.checkUserDescription = _loginData.userDescription;
+						    _baseObj.checkUserName = _loginData.userName;
+						    _baseObj.classes = _this.classes;
+						    _baseObj.createDate = _this.createDate;
+						    _baseObj.createUser = _loginData.userName;
+						    _baseObj.productName = _this.productName;
+						    _baseObj.productNo = _this.productNo;
+						    _baseObj.productNum = _this.productNum;
+						    _baseObj.subId = _this.subId;
+						    _baseObj.unqualifiedNum = _this.sumNum;
+						    _baseObj.updateDate = _this.updateDate;
+						   // console.log(_baseObj);
+						var _sizeObj = {};
+						    _sizeObj.active = _this.active1;
+						    _sizeObj.checkInfoId = _this.subId;
+						    _sizeObj.createDate = _this.createDate1;
+						    _sizeObj.createUser = _loginData.userName;
+						    _sizeObj.innerLen1 = _this.innerLen1;
+						    _sizeObj.innerLen2 = _this.innerLen2;
+						    _sizeObj.innerLen3 = _this.innerLen3;
+						    _sizeObj.innerLen11 = _this.innerLen11;
+						    _sizeObj.innerLen22 = _this.innerLen22;
+						    _sizeObj.innerLen33 = _this.innerLen33;
+						    _sizeObj.length1 = _this.length1;
+						    _sizeObj.length2 = _this.length2;
+						    _sizeObj.length3 = _this.length3;
+						    _sizeObj.outerLen1 = _this.outerLen1;
+						    _sizeObj.outerLen2 = _this.outerLen2;
+						    _sizeObj.outerLen3 = _this.outerLen3;
+						    _sizeObj.outerLen11 = _this.outerLen11;
+						    _sizeObj.outerLen22 = _this.outerLen22;
+						    _sizeObj.outerLen33 = _this.outerLen33;
+						    _sizeObj.subId = _this.subId1;
+						    _sizeObj.updateDate = _this.updateDate1;
+						var _defectData = [];
+						//console.log(_this.products2);
+						_this.products2.forEach(function(item, index, length) {
+							if (item.defectNum > 0) {
+								//console.log(JSON.stringify(item));
+								_defectData.push(item);
+							}
+						});
+						var _baseXml = toXmlForDataFilters([_baseObj]);
+						var _sizeXml = toXmlForDataFilters([_sizeObj]);
+						var _defectXml = toXmlForDataFilters(_defectData);
+						var _params = {
+							subId: _this.subId,
+							type: parseInt(_type),
+							jcxxXml: _baseXml,
+							ccjcXml: _sizeXml,
+							defectXml: _defectXml
+						};
+						//console.log(_baseXml+"---"+_sizeXml+"---"+_defectXml);
+						/*mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"saveInfo",_params,function(data){
+							if(data.success == 1){
+								console.log("保存成功");
+								//重写mui.back,返回上一页自动刷新界面
+								mui.back = function(){
+									var ws = plus.webview.getWebviewById("commentLists.html");
+									ws.reload(true); 
+								}
+								mui.back();
+							}
+						})*/
+						mui.ajax("http://192.168.1.15:8888/nbjh/nbjh/"+"saveInfo",{
+							data:_params,
+							type:'post',
+							timeout:10000,
+							beforeSend: function() {
+						        plus.nativeUI.showWaiting("提交中。。。");
+						    },
+						    complete: function() {
+						        plus.nativeUI.closeWaiting();
+						        mask.close();//关闭遮罩层
+						    },
+							success:function(data){
+								if(data.success == 1){
+									console.log("保存成功");
+									//重写mui.back,返回上一页自动刷新界面
+									mui.back = function(){
+										var ws = plus.webview.getWebviewById("commentLists.html");
+										ws.reload(true); 
+										mask.close();//关闭遮罩层
+									}
+									mui.back();
+								}
+							},
+							error:function(){
+								mask.close();//关闭遮罩层
+							}
+						})
+				 	}
+		        }
+		   });
+		   //上拉加载
+		   var _page = 1;
+		function onRefreshData(){
+			//count++;//翻下一页
+			mui('#refreshData').pullRefresh().refresh(true);
+			//console.log(app.searchValDatas);
+			var _start = app.searchValDatas.length;
+			_page++;
+			console.log(_page);
+			console.log(_start);
+	        data={
+	            //...,
+	            start:_start,
+	            limit:20,
+	            page:_page,
+	            searchVal:app.searchVal
+	        };
+			mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"getProductModel",data,function(data){
+			//console.log(data.data);
+    			if(data.success == 1){
+    				app.searchValDatas = data.data;
+    			 	mui('#refreshData').pullRefresh().endPullupToRefresh();
+    			}
+    		})
+		}
+		//下拉刷新
+		function pulldownRefresh(){
+			 //mui('#refreshData').pullRefresh().endPulldownToRefresh();
+			 setTimeout(function() {
+		        count = 1;//刷新并显示第一页
+		        data={
+		            start:0,
+		            limit:20,
+		            page:count,
+		            searchVal:app.searchVal
+		        };
+		        //type=1;//代表下拉刷新
+		        //toList(data,type);//具体取数据的方法
+		        mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"getProductModel",data,function(data){
+			console.log(data.data);
+    			if(data.success == 1){
+    				app.searchValDatas = data.data;
+    				mui('#refreshData').pullRefresh().endPulldownToRefresh();
+    			}else{
+    				mui('#refreshData').pullRefresh().endPullupToRefresh(true);
+    			}
+    		})
+		    }, 100);
+		}
+		</script>
+	</body>
+
+</html>

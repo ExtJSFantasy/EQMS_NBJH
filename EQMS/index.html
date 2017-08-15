@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+    <title></title>
+    <script src="js/mui.min.js"></script>
+    <script src="config.js"></script>
+    <script src="js/function.js"></script>
+	<script src="js/common.js"></script>
+    <link href="css/mui.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" type="text/css" href="css/global.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
+    <link rel="stylesheet" type="text/css" href="css/style.css"/>
+</head>
+<body>
+	<div class="mui-content" style="margin-top: 25%;">
+		<div class="logo mui-text-center">
+			<label class="mui-icon icon-EQMS"></label>
+		</div>
+	    <form class="mui-input-group">
+	        <div class="mui-input-row">
+	            <label class="mui-icon icon-user2"></label>
+	            <input id="user" type="text" class="mui-input-clear" placeholder="请输入用户名">
+	        </div>
+	        <div class="mui-input-row">
+	            <label class="mui-icon icon-pwd"></label>
+	            <input id="pwd" type="password" class="mui-input-password" placeholder="请输入密码">
+	        </div>
+	    </form>
+	    <div class="mui-row">
+            <button type="button" class="mui-btn mui-btn-block mui-btn-primary" id="login">登 录</button>
+        </div>
+        <div class="mui-row mui-text-center">
+            <button type="button" class="mui-btn mui-btn-link" id="setHost">
+            	<span class="mui-icon icon-cog"></span>账套设置
+           	</button>
+        </div>
+        <div class="mui-row mui-text-center">
+            <button type="button" class="mui-btn mui-btn-link" id="setHostByCode" >
+            	<span class="mui-icon icon-code"></span>扫一扫设置账套
+            </button>
+        </div>
+	</div>
+	<script type="text/javascript">
+		initHost();
+		var aniShow = "pop-in";
+		
+		mui.init({
+			swipeBack: false,
+			//不可以预加载，点击tab会不灵敏
+			/*preloadPages:[
+				{
+					url: "app/main2.html",
+					id: "main2"
+				}
+			]*/
+		});
+		
+		if(mui.os.plus){
+			mui.plusReady(function(){
+				//console.log("local",plus.storage.getLength());
+				//自动更新
+				svn(plus.runtime.version);
+				//首次运行
+				firstRunApp();
+				//登陆
+				loginIn();
+				//账套设置
+				settingHost();
+			});
+		}else{
+			//登陆
+			loginIn();
+			//账套设置
+			settingHost();
+		}
+		
+		//首次启动
+		function firstRunApp(){
+			//读取本地存储，检查是否为首次启动
+			var showGuide = plus.storage.getItem("lauchFlag");
+			if(showGuide){
+				//有值，说明已经显示过了，无需显示；
+				//关闭splash页面；
+				plus.navigator.closeSplashscreen();
+				plus.navigator.setFullscreen(false);
+			}else{
+				//显示启动导航
+				mui.openWindow({
+					id:'guide',
+					url:'app/setting/guide.html',
+					/*styles: {
+						popGesture:"none"
+					},*/
+					show:{
+						aniShow:'none'
+					},
+					waiting:{
+						autoShow:false
+					}
+				});
+			}
+		}
+		
+		//登陆
+		function loginIn(){
+			document.getElementById("login").addEventListener('tap', function(e){
+				
+				//console.log(initHost());
+				console.log(getLsItem("host"));
+				var _url = 'app/main2.html';
+				var _user = document.getElementById("user").value.trim();
+				var _pwd = document.getElementById("pwd").value.trim();
+				if(_user == null || _user == ''){
+					mui.toast("请输入用户名！");
+					return;
+				}
+				if(_pwd == null || _pwd == ''){
+					mui.toast("请输入密码！");
+					return;
+				}
+				if(mui.os.plus){
+					_url = 'app/main2.html';
+				}
+				mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"login",
+				{
+					userName:_user,
+					pwd:_pwd
+				},
+				function(data){
+					if(data.success == 1){
+						setLsItem("logindata",JSON.stringify(data.data));
+						clicked("app/main2.html", true, true,{},{});
+				    	mui.toast("登录成功");
+					}
+				});
+			});
+		}
+		
+		//账套设置
+		function settingHost(){
+			document.getElementById("setHost").addEventListener('tap', function(e){
+				mui.openWindow({
+					url : 'app/setting/HostMgr.html',
+					id: 'app/setting/HostMgr.html',
+					styles: {
+						popGesture: 'close'
+					},
+					show: {
+						aniShow: aniShow
+					},
+					waiting: {
+						autoShow: false
+					}
+			    });
+			});
+			
+			document.getElementById("setHostByCode").addEventListener('tap', function(){
+				/*mui.openWindow({
+					url : 'app/util/barcode_scan.html',
+					id: 'app/util/barcode_scan.html',
+					styles: {
+						popGesture: 'close'
+					},
+					show: {
+						aniShow: aniShow
+					},
+					waiting: {
+						autoShow: false
+					}
+			    });*/
+			});
+		}
+		
+		//处理扫描结果
+		function scaned(t, r, f){
+//			console.log("输出结果");
+//			console.log(t);
+//			console.log(r);
+//			console.log(f);
+			plus.nativeUI.toast("账套已变更为："+r);
+			setLsItem("host", r);
+		}
+	</script>
+</body>
+</html>

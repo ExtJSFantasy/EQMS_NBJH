@@ -1,0 +1,74 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+	</head>
+		
+	<body>
+    	<ul class="mui-table-view mui-grid-view mui-grid-9">
+	    	<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="GP12">
+	    	    <a href="#">
+	    	        <span class="icon-telegram" style="color: #ED5F12;font-size: 3rem;"></span>
+	    	        <div class="mui-media-body">GP12</div>
+	    	    </a>
+	    	</li>
+	    	<li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3" id="halfProducs">
+	    	    <a href="#">
+	    	       	<span class="icon-google-drive" style="color: #ED5F12;font-size: 3rem;"></span>
+	    	       	<div class="mui-media-body">半成录入</div>
+	    	    </a>
+	    	</li>
+    	</ul>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript" src="../js/common.js" ></script>
+		<script type="text/javascript" src="../config.js" ></script>
+		<script type="text/javascript" src="../js/function.js" ></script>
+		<script type="text/javascript">
+			mui.init();
+			var aniShow = "pop-in";
+			document.getElementById("GP12").addEventListener('tap', function(){
+				var _userName = JSON.parse(getLsItem("logindata"))[0].userName;
+				setLsItem("type",2);
+				/*mAjax("http://192.168.1.15:8888/nbjh/nbjh/"+"getCheckInfo",{checkUserName: _userName, type: 1},function(data){
+					if(data.success == 1){
+						console.log(data.data);
+						clicked("../app/nbjh/commentLists.html",true,true,{}{})
+					}
+				})*/
+				//clicked("../app/nbjh/commentLists.html",true,true,{},{})
+				mui.openWindow({
+					url:'../app/nbjh/commentLists.html',
+					id:'commentLists.html',
+					styles: {
+						popGesture:"none"
+//						top: '64px',
+//						bottom: '50px',
+//						bounce: 'vertical'
+					},
+					show:{
+						aniShow: aniShow
+					},
+					waiting:{
+						autoShow:false
+					}
+				})
+			});
+			
+			document.getElementById("halfProducs").addEventListener('tap', function(){
+				//clicked("../app/nbjh/commentLists.html",true,true,{},{})
+				setLsItem("type",1);
+				mui.openWindow({
+					url:'../app/nbjh/commentLists.html',
+					id:'commentLists.html'
+				})
+				
+			});
+		</script>
+	</body>
+
+</html>

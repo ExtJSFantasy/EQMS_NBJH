@@ -1,0 +1,318 @@
+{
+	"index.html": {
+		"resources": [
+			"js/common.js",
+			"css/login.css",
+			"js/mui.min.js",
+			"css/global.css",
+			"fonts/mui.ttf",
+			"fonts/icomoon.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"config.js",
+			"js/function.js"
+		],
+		"refer": [
+			"app/appInfo.html",
+			"app/main.html",
+			"app/setting/HostMgr.html",
+			"app/setting/guide.html",
+			"app/util/barcode_scan.html",
+			"app/main1.html",
+			"app/main2.html",
+			"app/main3.html"
+		]
+	},
+	"app/main.html": {
+		"resources": [
+			"app/appInfo.html",
+			"css/mui.min.css",
+			"css/global.css",
+			"css/style.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"fonts/icomoon.ttf",
+			"app/msgInfo.html",
+			"js/jquery-1.11.0.js"
+		],
+		"refer": [
+			"app/msgInfo.html",
+			"app/appInfo.html",
+			"app/taskInfo.html",
+			"app/setting.html"
+		]
+	},
+	"app/setting.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/global.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/function.js",
+			"images/logo.png",
+			"config.js",
+			"manifest.json",
+			"images/nbjhlogo.png"
+		],
+		"refer": []
+	},
+	"app/msgInfo.html": {
+		"resources": [
+			"js/vue.min.js",
+			"css/mui.min.css",
+			"css/global.css",
+			"css/style.css",
+			"js/mui.min.js"
+		],
+		"refer": []
+	},
+	"app/taskInfo.html": {
+		"href": "app/taskInfo.html",
+		"resources": [
+			"css/mui.min.css",
+			"css/global.css",
+			"js/mui.min.js"
+		],
+		"refer": [],
+		"priority": 0
+	},
+	"app/appInfo.html": {
+		"href": "app/appInfo.html",
+		"resources": [
+			"css/mui.min.css",
+			"css/style.css",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"fonts/icomoon.ttf",
+			"js/common.js",
+			"config.js",
+			"js/function.js"
+		],
+		"refer": [
+			"app/lpa/demo.html",
+			"app/lpa/lpaList.html",
+			"app/lpa/mapDemo.html",
+			"app/nbjh/commentLists.html"
+		],
+		"priority": 0
+	},
+	"app/setting/HostMgr.html": {
+		"href": "app/setting/HostMgr.html",
+		"resources": [
+			"css/mui.min.css",
+			"css/global.css",
+			"css/style.css",
+			"js/mui.min.js",
+			"js/vue.min.js",
+			"config.js",
+			"js/function.js",
+			"fonts/mui.ttf",
+			"fonts/icomoon.ttf"
+		],
+		"refer": [],
+		"priority": 0
+	},
+	"app/setting/guide.html": {
+		"href": "app/setting/guide.html",
+		"resources": [
+			"css/mui.min.css",
+			"js/mui.min.js"
+		],
+		"refer": [],
+		"priority": 0
+	},
+	"app/util/barcode_scan.html": {
+		"href": "app/util/barcode_scan.html",
+		"resources": [
+			"css/common.css",
+			"js/common.js"
+		],
+		"refer": [],
+		"priority": 0
+	},
+	"app/lpa/demo.html": {
+		"resources": [
+			"js/mui.min.js",
+			"css/global.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css"
+		],
+		"refer": []
+	},
+	"app/lpa/lpaList.html": {
+		"resources": [
+			"css/index.css",
+			"js/jquery-1.11.0.js",
+			"css/common.css",
+			"js/calendar.js",
+			"js/swiper-3.3.1.min.js",
+			"css/swiper-3.3.1.min.css",
+			"js/mui.min.js",
+			"css/global.css",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"js/function.js",
+			"fonts/icomoon.ttf",
+			"css/style.css"
+		],
+		"refer": []
+	},
+	"app/lpa/mapDemo.html": {
+		"resources": [
+			"images/dh.png",
+			"js/mui.min.js",
+			"css/mui.min.css",
+			"css/global.css",
+			"fonts/mui.ttf"
+		],
+		"refer": []
+	},
+	"app/main1.html": {
+		"resources": [
+			"images/logo.png",
+			"app/msgInfo.html",
+			"app/appInfo.html",
+			"js/jquery-1.11.0.js",
+			"js/vue.min.js",
+			"app/taskInfo.html",
+			"app/setting.html",
+			"fonts/mui.ttf",
+			"fonts/icomoon.ttf",
+			"css/style.css",
+			"js/mui.min.js",
+			"css/global.css",
+			"css/mui.min.css",
+			"js/function.js"
+		],
+		"refer": [
+			"app/lpa/mapDemo.html"
+		]
+	},
+	"app/main2.html": {
+		"resources": [
+			"app/msgInfo.html",
+			"js/jquery-1.11.0.js",
+			"js/vue.min.js",
+			"fonts/icomoon.ttf",
+			"js/jquery-3.2.1.min.js",
+			"fonts/mui.ttf",
+			"js/mui.min.js",
+			"css/global.css",
+			"css/mui.min.css",
+			"css/style.css",
+			"config.js",
+			"js/function.js"
+		],
+		"refer": [
+			"app/msgInfo.html",
+			"app/appInfo.html",
+			"app/taskInfo.html",
+			"app/setting.html"
+		]
+	},
+	"app/nbjh/commentLists.html": {
+		"resources": [
+			"js/common.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"fonts/icomoon.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/vue.min.js",
+			"config.js",
+			"js/function.js",
+			"css/global.css"
+		],
+		"refer": [
+			"app/nbjh/verifyView.html"
+		]
+	},
+	"app/nbjh/verifyView.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"js/mui.poppicker.js",
+			"css/mui.poppicker.css",
+			"css/mui.picker.css",
+			"js/common.js",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/vue.min.js",
+			"config.js",
+			"js/function.js",
+			"fonts/icomoon.ttf",
+			"css/global.css"
+		],
+		"refer": [
+			"app/nbjh/camera.html",
+			"app/nbjh/cameraView.html"
+		]
+	},
+	"app/nbjh/camera.html": {
+		"resources": [
+			"js/mui.min.js",
+			"fonts/icomoon.ttf",
+			"css/mui.min.css",
+			"css/style.css",
+			"js/function.js",
+			"js/vue.min.js",
+			"js/mui.zoom.js",
+			"css/app.css",
+			"fonts/mui.ttf",
+			"css/iconfont.css",
+			"css/font-awesome.min.css",
+			"js/mui.previewimage.js",
+			"js/utitls.js",
+			"css/feedback-page.css",
+			"images/iconfont-tianjia.png",
+			"js/common.js",
+			"js/jquery-3.2.1.min.js",
+			"fonts/fontawesome-webfont.ttf"
+		],
+		"refer": []
+	},
+	"app/nbjh/cameraView.html": {
+		"resources": [
+			"js/mui.picker.js",
+			"fonts/mui.ttf",
+			"fonts/icomoon.ttf",
+			"css/style.css",
+			"js/vue.min.js",
+			"css/mui.picker.css",
+			"js/common.js",
+			"js/mui.zoom.js",
+			"js/mui.min.js",
+			"js/mui.poppicker.js",
+			"css/mui.min.css",
+			"js/mui.previewimage.js",
+			"css/mui.poppicker.css",
+			"js/function.js",
+			"css/mui.imageview.css",
+			"images/iconfont-tianjia.png",
+			"config.js",
+			"css/global.css"
+		],
+		"refer": []
+	},
+	"app/main3.html": {
+		"resources": [
+			"app/msgInfo.html",
+			"js/mui.min.js",
+			"fonts/mui.ttf",
+			"css/mui.min.css",
+			"css/app.css",
+			"css/iconfont.css",
+			"fonts/icomoon.ttf",
+			"css/style.css",
+			"css/global.css"
+		],
+		"refer": [
+			"app/msgInfo.html",
+			"app/appInfo.html",
+			"app/taskInfo.html",
+			"app/setting.html"
+		]
+	}
+}

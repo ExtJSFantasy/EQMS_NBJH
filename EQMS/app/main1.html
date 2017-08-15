@@ -1,0 +1,99 @@
+<!doctype html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<link href="../css/mui.min.css" rel="stylesheet" />
+		<link rel="stylesheet" type="text/css" href="../css/global.css"/>
+		<link rel="stylesheet" type="text/css" href="../css/style.css"/>
+		<script type="text/javascript" src="../js/jquery-1.11.0.js" ></script>
+		<style type="text/css">
+			.mui-content{
+				height: 100%;
+			}
+			
+			iframe{
+				border: 0;
+			}
+			
+			.mui-control-content{
+				height: 100%;
+			}
+			
+			.searchPopover{
+				height: 100%;
+				width: 100%;
+				z-index: 999;
+				visibility: hidden;
+				position: fixed;
+				background: wheat;
+				top: 0;
+				bottom: 0;
+			}
+			
+			.on{
+				visibility: visible;
+				transform: translate(0, 0px);
+			}
+		</style>
+	</head>
+
+	<body>
+		<header class="mui-bar mui-bar-nav">
+		    <h1 class="mui-title" id="title">应用</h1>
+		    <a class="mui-icon mui-icon-search mui-pull-right"></a>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+	        <a class="mui-tab-item" href="#msgInfo">
+	            <span class="mui-icon icon-bubble"></span>
+	            <span class="mui-tab-label">消息</span>
+	        </a>
+	        <a class="mui-tab-item" href="#taskInfo">
+	            <span class="mui-icon icon-files-empty"></span>
+	            <span class="mui-tab-label">任务</span>
+	        </a>
+	        <a class="mui-tab-item mui-active" href="#appInfo">
+	            <span class="mui-icon icon-windows8"></span>
+	            <span class="mui-tab-label">应用</span>
+	        </a>
+	        <a class="mui-tab-item" href="#setting">
+	            <span class="mui-icon mui-icon-gear"></span>
+	            <span class="mui-tab-label">设置</span>
+	        </a>
+	   </nav>
+	   <div class="mui-content">
+	       	<div id="msgInfo" class="mui-control-content">
+				<iframe src="msgInfo.html" width="100%" height="100%"></iframe>
+			</div>
+			<div id="taskInfo" class="mui-control-content">
+				<iframe src="taskInfo.html" width="100%" height="100%"></iframe>
+			</div>
+			<div id="appInfo" class="mui-control-content mui-active">
+				<iframe src="appInfo.html" width="100%" height="100%"></iframe>
+			</div>
+			<div id="setting" class="mui-control-content">
+				<iframe src="setting.html" width="100%" height="100%"></iframe>
+			</div>
+	   </div>
+	   <div class="searchPopover">
+	   		<header class="mui-bar mui-bar-nav">
+	   		    <h1 class="mui-title">搜索</h1>
+	   		    <a class="mui-icon mui-icon-close mui-pull-right"></a>
+	   		</header>
+	   </div>
+		<script src="../js/mui.min.js"></script>
+		<script type="text/javascript">
+			mui.init();
+			
+			$(function(){
+				$('.mui-icon-search,.mui-icon-close').on('tap', function(){
+					mui.toast('tttttt')
+					$('.searchPopover').toggleClass('on');
+				});
+			})
+		</script>
+	</body>
+
+</html>

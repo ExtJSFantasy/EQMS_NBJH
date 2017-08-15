@@ -1,0 +1,139 @@
+/* CSS Document */
+@charset "utf-8";
+
+em, i{
+    font-style: normal;
+}
+
+.grid{
+	width: 94%;
+	margin: 0 auto;
+}
+
+/*start day*/
+.content{
+    /*padding-top: .4rem;*/
+}
+
+.week ul{
+	position: relative;
+	width: 98%;
+    padding: 0 1%;
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    margin: 0;
+}
+.week ul li{
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    flex: auto;
+    -ms-flex: auto;
+    -webkit-flex: auto;
+    justify-content: center;
+    align-items: center;
+    /*font-size: .13rem;*/
+}
+.tables{
+	/*font-size: .14rem;*/
+	color: #666;
+	font-family:"微软雅黑";
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+}
+
+.calenda{
+	position: relative;
+    /*top: 1.2rem;*/
+}
+
+.tables tbody{
+    width: 100%;
+}
+.tables tbody tr{
+    width: 100%;
+    /*padding: 0 1%;*/
+    display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    flex-wrap: wrap;
+    -webkit-flex-wrap: wrap;
+}
+.tables tbody tr td{
+    /*border: 2px solid #fff;*/
+    flex: 0;
+    flex-grow: 0;
+    flex-shrink: 0;
+    flex-basis: 14%;
+    justify-content: center;
+    padding: .3rem 0;
+    position: relative;
+}
+.tables .list i{
+	display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    /*font-size: .15rem;*/
+    justify-content: center;
+}
+.tables .list em{
+	display: flex;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    font-size: .5rem;
+    justify-content: center;
+
+}
+.swiper-slide table tr{
+	text-align: center;
+	height: 3.2rem;
+	/*margin-bottom: .2rem;*/
+}
+tr .not_this{
+	color: #ccc !important;
+}
+.today{
+	background: #ec5252;
+	color: #fff;
+    border-radius: 50%;
+}
+.xuanzhong{
+	/*border: 2px solid #f20 !important;*/
+	background: rgb(0, 183, 236);
+    color: white;
+    border-radius: 50%;
+}
+tr td:first-child{color: #f00;}
+tr td:last-child{color: #f00;}
+
+td{position: relative;}
+td .fangjia{
+
+    display: block;
+    width: .14rem;
+    height: .14rem;
+    background: url(../images/calendar_img_relax.png) no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+    top: 0; 
+
+}
+td .shangban{
+	display: block;
+    width: .14rem;
+    height: .14rem;
+    background: url(../images/calendar_img_work.png) no-repeat;
+    background-size: contain;
+    position: absolute;
+    right: 0;
+    top: 0; 
+}
+
+a{
+	color: #333;
+	font-size: .8rem;
+    text-decoration:none;
+}
